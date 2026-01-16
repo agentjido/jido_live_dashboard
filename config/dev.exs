@@ -1,0 +1,2 @@
+# Development configuration
+import Config

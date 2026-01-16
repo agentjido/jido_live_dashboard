@@ -1,0 +1,29 @@
+# Elixir
+/_build
+/deps
+/doc
+*.beam
+*.ez
+
+# IDEs
+/.elixir_ls
+/.idea
+/.vscode
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+/cover
+*.coverdata
+
+# Dialyzer PLT files
+/priv/plts/
+*.plt
+*.plt.hash
+
+# CI/CD
+.wreckit
