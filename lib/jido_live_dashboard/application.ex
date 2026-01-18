@@ -4,7 +4,9 @@ defmodule JidoLiveDashboard.Application do
 
   @impl true
   def start(_type, _args) do
-    children = []
+    children = [
+      JidoLiveDashboard.TraceBuffer
+    ]
 
     opts = [strategy: :one_for_one, name: JidoLiveDashboard.Supervisor]
     Supervisor.start_link(children, opts)

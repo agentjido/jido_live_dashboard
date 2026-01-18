@@ -7,10 +7,9 @@ defmodule JidoLiveDashboard do
 
   ## Features
 
-  - Monitor active agents and their state
-  - Track action execution metrics
-  - Real-time performance metrics
-  - Custom dashboard pages for Jido-specific monitoring
+  - **Discovery** - Browse discovered Actions, Agents, Skills, and Sensors
+  - **Runtime** - Monitor live AgentServer processes and pool status
+  - **Traces** - View telemetry events and trace correlation for debugging
 
   ## Installation
 
@@ -27,12 +26,49 @@ defmodule JidoLiveDashboard do
       scope "/" do
         pipe_through :browser
         live_dashboard "/dashboard",
-          additional_pages: [
-            jido_agents: JidoLiveDashboard.Pages.Agents,
-            jido_actions: JidoLiveDashboard.Pages.Actions
-          ]
+          additional_pages: JidoLiveDashboard.pages()
       end
+
+  Or add individual pages:
+
+      live_dashboard "/dashboard",
+        additional_pages: [
+          jido: JidoLiveDashboard.Pages.Home,
+          jido_discovery: JidoLiveDashboard.Pages.Discovery,
+          jido_runtime: JidoLiveDashboard.Pages.Runtime,
+          jido_traces: JidoLiveDashboard.Pages.Traces
+        ]
+
+  ## Configuration
+
+  Optional configuration for runtime introspection:
+
+      config :jido_live_dashboard,
+        trace_buffer_size: 500,  # Max events in trace buffer
+        runtime: [
+          instances: [MyApp.Jido],  # Jido instances to monitor
+          worker_pools: %{MyApp.Jido => [:fast_search, :planner]},
+          instance_managers: [:sessions, :rooms]
+        ]
   """
+
+  @doc """
+  Returns all dashboard pages for easy integration.
+
+  ## Example
+
+      live_dashboard "/dashboard",
+        additional_pages: JidoLiveDashboard.pages()
+  """
+  @spec pages() :: keyword()
+  def pages do
+    [
+      jido: JidoLiveDashboard.Pages.Home,
+      jido_discovery: JidoLiveDashboard.Pages.Discovery,
+      jido_runtime: JidoLiveDashboard.Pages.Runtime,
+      jido_traces: JidoLiveDashboard.Pages.Traces
+    ]
+  end
 
   @doc """
   Get the version of JidoLiveDashboard.

@@ -76,8 +76,23 @@ defmodule JidoLiveDashboard.MixProject do
     ]
   end
 
+  defp jido_dep(app, rel_path, hex_req, extra_opts \\ []) do
+    path = Path.expand(rel_path, __DIR__)
+
+    if File.dir?(path) and File.exists?(Path.join(path, "mix.exs")) do
+      {app, Keyword.merge([path: rel_path, override: true], extra_opts)}
+    else
+      {app, hex_req, extra_opts}
+    end
+    |> case do
+      {app, opts} when is_list(opts) -> {app, opts}
+      {app, req, opts} -> {app, req, opts}
+    end
+  end
+
   defp deps do
     [
+      jido_dep(:jido, "../jido", "~> 1.0"),
       {:phoenix_live_view, "~> 1.0"},
       {:phoenix_live_dashboard, "~> 0.8"},
       {:telemetry_metrics, "~> 1.1"},
