@@ -239,12 +239,13 @@ defmodule JidoLiveDashboard.TraceBuffer do
     :telemetry.attach_many(
       "jido-live-dashboard-trace-buffer",
       @telemetry_events,
-      &handle_telemetry_event/4,
+      &__MODULE__.handle_telemetry_event/4,
       nil
     )
   end
 
-  defp handle_telemetry_event(event_name, measurements, metadata, _config) do
+  @doc false
+  def handle_telemetry_event(event_name, measurements, metadata, _config) do
     if Process.whereis(__MODULE__) do
       send(__MODULE__, {:telemetry_event, event_name, measurements, metadata})
     end

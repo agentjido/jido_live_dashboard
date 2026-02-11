@@ -81,8 +81,8 @@ defmodule JidoLiveDashboard.Pages.Home do
               <span class="font-semibold"><%= @discovery.agents %></span>
             </div>
             <div class="flex justify-between">
-              <span class="text-gray-600">Skills:</span>
-              <span class="font-semibold"><%= @discovery.skills %></span>
+              <span class="text-gray-600">Plugins:</span>
+              <span class="font-semibold"><%= @discovery.plugins %></span>
             </div>
             <div class="flex justify-between">
               <span class="text-gray-600">Sensors:</span>
@@ -134,7 +134,7 @@ defmodule JidoLiveDashboard.Pages.Home do
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
           <div class="border rounded p-4">
             <h3 class="font-semibold text-blue-600">Discovery</h3>
-            <p class="text-gray-600 mt-1">Browse Actions, Agents, Skills, and Sensors in your catalog</p>
+            <p class="text-gray-600 mt-1">Browse Actions, Agents, Plugins, and Sensors in your catalog</p>
           </div>
           <div class="border rounded p-4">
             <h3 class="font-semibold text-blue-600">Runtime</h3>

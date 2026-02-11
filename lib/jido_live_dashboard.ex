@@ -7,7 +7,7 @@ defmodule JidoLiveDashboard do
 
   ## Features
 
-  - **Discovery** - Browse discovered Actions, Agents, Skills, and Sensors
+  - **Discovery** - Browse discovered Actions, Agents, Plugins, and Sensors
   - **Runtime** - Monitor live AgentServer processes and pool status
   - **Traces** - View telemetry events and trace correlation for debugging
 

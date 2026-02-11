@@ -225,13 +225,16 @@ defmodule JidoLiveDashboard.Runtime do
     case Jido.Discovery.catalog() do
       {:ok, catalog} ->
         components = catalog.components
+        plugins = length(Map.get(components, :plugins, []))
 
         {:ok,
          %{
            last_updated: catalog.last_updated,
            actions: length(Map.get(components, :actions, [])),
            agents: length(Map.get(components, :agents, [])),
-           skills: length(Map.get(components, :skills, [])),
+           plugins: plugins,
+           # Backward-compatible alias for older dashboard templates
+           skills: plugins,
            sensors: length(Map.get(components, :sensors, [])),
            demos: length(Map.get(components, :demos, []))
          }}

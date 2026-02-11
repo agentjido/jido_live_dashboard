@@ -2,7 +2,7 @@ defmodule JidoLiveDashboard.Pages.Discovery do
   @moduledoc """
   Discovery page for browsing the Jido component catalog.
 
-  Displays all discovered Actions, Agents, Skills, Sensors, and Demos
+  Displays all discovered Actions, Agents, Plugins, Sensors, and Demos
   from the Jido.Discovery catalog with filtering and detail views.
   """
 
@@ -119,7 +119,9 @@ defmodule JidoLiveDashboard.Pages.Discovery do
   defp get_component_type(assigns) do
     case assigns[:params]["type"] do
       "agents" -> :agents
-      "skills" -> :skills
+      # Backward-compatible with older links that used `skills`
+      "skills" -> :plugins
+      "plugins" -> :plugins
       "sensors" -> :sensors
       "demos" -> :demos
       _ -> :actions
@@ -130,7 +132,7 @@ defmodule JidoLiveDashboard.Pages.Discovery do
     case type do
       :actions -> Jido.Discovery.list_actions()
       :agents -> Jido.Discovery.list_agents()
-      :skills -> Jido.Discovery.list_skills()
+      :plugins -> Jido.Discovery.list_plugins()
       :sensors -> Jido.Discovery.list_sensors()
       :demos -> Jido.Discovery.list_demos()
     end
@@ -148,12 +150,12 @@ defmodule JidoLiveDashboard.Pages.Discovery do
           total:
             length(Map.get(components, :actions, [])) +
               length(Map.get(components, :agents, [])) +
-              length(Map.get(components, :skills, [])) +
+              length(Map.get(components, :plugins, [])) +
               length(Map.get(components, :sensors, [])) +
               length(Map.get(components, :demos, [])),
           actions: length(Map.get(components, :actions, [])),
           agents: length(Map.get(components, :agents, [])),
-          skills: length(Map.get(components, :skills, [])),
+          plugins: length(Map.get(components, :plugins, [])),
           sensors: length(Map.get(components, :sensors, [])),
           demos: length(Map.get(components, :demos, []))
         }
@@ -169,7 +171,7 @@ defmodule JidoLiveDashboard.Pages.Discovery do
     [
       {:actions, "Actions", 0},
       {:agents, "Agents", 0},
-      {:skills, "Skills", 0},
+      {:plugins, "Plugins", 0},
       {:sensors, "Sensors", 0},
       {:demos, "Demos", 0}
     ]
@@ -179,7 +181,7 @@ defmodule JidoLiveDashboard.Pages.Discovery do
     [
       {:actions, "Actions", info.actions},
       {:agents, "Agents", info.agents},
-      {:skills, "Skills", info.skills},
+      {:plugins, "Plugins", info.plugins},
       {:sensors, "Sensors", info.sensors},
       {:demos, "Demos", info.demos}
     ]
