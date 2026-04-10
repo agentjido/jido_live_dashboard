@@ -68,15 +68,10 @@ defmodule JidoLiveDashboard.Runtime do
 
       _pid ->
         agents =
-          case DynamicSupervisor.which_children(supervisor) do
-            children when is_list(children) ->
-              children
-              |> Enum.filter(fn {_id, pid, _type, _modules} -> is_pid(pid) end)
-              |> Enum.map(&child_to_agent_info/1)
-
-            _ ->
-              []
-          end
+          supervisor
+          |> DynamicSupervisor.which_children()
+          |> Enum.filter(fn {_id, pid, _type, _modules} -> is_pid(pid) end)
+          |> Enum.map(&child_to_agent_info/1)
 
         {:ok, agents}
     end
@@ -300,10 +295,15 @@ defmodule JidoLiveDashboard.Runtime do
       agent_module: state.agent_module,
       status: state.status,
       queue_size: state.queue_size,
-      children_count: map_size(state.children || %{}),
-      attachments_count: MapSet.size(state.attachments || MapSet.new())
+      children_count: map_size(state.children),
+      attachments_count: lifecycle_attachments_count(state.lifecycle)
     }
   rescue
     _ -> %{raw: inspect(state, limit: 100)}
   end
+
+  defp lifecycle_attachments_count(%{attachments: %MapSet{} = attachments}),
+    do: MapSet.size(attachments)
+
+  defp lifecycle_attachments_count(_), do: 0
 end

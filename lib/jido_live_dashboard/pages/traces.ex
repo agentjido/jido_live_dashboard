@@ -232,10 +232,8 @@ defmodule JidoLiveDashboard.Pages.Traces do
   defp get_trace_events(nil), do: []
 
   defp get_trace_events(trace_id) do
-    case TraceBuffer.get_trace(trace_id) do
-      {:ok, events} -> events
-      _ -> []
-    end
+    {:ok, events} = TraceBuffer.get_trace(trace_id)
+    events
   end
 
   defp group_by_trace(events) do
