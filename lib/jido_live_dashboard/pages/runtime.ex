@@ -230,21 +230,16 @@ defmodule JidoLiveDashboard.Pages.Runtime do
   defp get_pools(instances, pool_config) when map_size(pool_config) > 0 do
     Enum.flat_map(instances, fn instance ->
       pool_names = Map.get(pool_config, instance, [])
-
-      case Runtime.list_worker_pools(instance, pool_names) do
-        {:ok, pools} -> pools
-        _ -> []
-      end
+      {:ok, pools} = Runtime.list_worker_pools(instance, pool_names)
+      pools
     end)
   end
 
   defp get_pools(_, _), do: []
 
   defp get_managers(manager_names) when length(manager_names) > 0 do
-    case Runtime.list_instance_managers(manager_names) do
-      {:ok, managers} -> managers
-      _ -> []
-    end
+    {:ok, managers} = Runtime.list_instance_managers(manager_names)
+    managers
   end
 
   defp get_managers(_), do: []

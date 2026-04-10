@@ -158,17 +158,13 @@ defmodule JidoLiveDashboard.Pages.Home do
   end
 
   defp get_agent_count do
-    case Runtime.list_agent_servers() do
-      {:ok, agents} -> length(agents)
-      _ -> 0
-    end
+    {:ok, agents} = Runtime.list_agent_servers()
+    length(agents)
   end
 
   defp get_trace_stats do
-    case TraceBuffer.stats() do
-      {:ok, stats} -> stats
-      _ -> %{count: 0, max_size: 0, trace_count: 0, memory_bytes: 0}
-    end
+    {:ok, stats} = TraceBuffer.stats()
+    stats
   end
 
   defp format_bytes(bytes) when bytes < 1024, do: "#{bytes} B"
