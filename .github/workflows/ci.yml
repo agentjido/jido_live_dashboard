@@ -1,28 +1,31 @@
 name: CI
 
 on:
-  push:
-    branches: [main]
   pull_request:
-    branches: [main]
+  merge_group:
+  push:
+    branches:
+      - main
 
-env:
-  MIX_ENV: test
-  ELIXIR_VERSION: "1.18"
-  OTP_VERSION: "27"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  actions: read
+  contents: read
 
 jobs:
-  lint:
-    name: Lint
-    uses: agentjido/github-actions/.github/workflows/elixir-lint.yml@v3
+  ci:
+    name: CI
+    uses: agentjido/github-actions/.github/workflows/jido-ci.yml@v4
+    secrets: inherit
     with:
-      otp_version: "27"
-      elixir_version: "1.18"
-
-  test:
-    name: Test
-    uses: agentjido/github-actions/.github/workflows/elixir-test.yml@v3
-    with:
-      otp_versions: '["26", "27"]'
-      elixir_versions: '["1.18"]'
+      otp_versions: '["27", "28"]'
+      elixir_versions: '["1.18", "1.19"]'
+      experimental_compile_elixir_versions: '["v1.20.0-rc.4"]'
+      experimental_compile_otp_versions: '["28.4.1"]'
+      experimental_compile_otp_name: '28'
+      credo_command: mix credo --min-priority higher
+      docs_command: mix docs -f html
       test_command: mix test
