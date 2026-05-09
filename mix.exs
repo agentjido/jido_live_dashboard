@@ -78,7 +78,7 @@ defmodule JidoLiveDashboard.MixProject do
 
   defp deps do
     [
-      {:jido, "~> 2.0.0-rc.4"},
+      {:jido, "~> 2.2.0"},
       {:phoenix_live_view, "~> 1.0"},
       {:phoenix_live_dashboard, "~> 0.8"},
       {:telemetry_metrics, "~> 1.1"},
