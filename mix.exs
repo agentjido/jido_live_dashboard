@@ -1,7 +1,7 @@
 defmodule JidoLiveDashboard.MixProject do
   use Mix.Project
 
-  @version "0.1.0"
+  @version "1.0.0"
   @source_url "https://github.com/agentjido/jido_live_dashboard"
   @description "Live dashboard for monitoring Jido ecosystem in real-time"
 
@@ -78,7 +78,7 @@ defmodule JidoLiveDashboard.MixProject do
 
   defp deps do
     [
-      {:jido, "~> 2.2.0"},
+      {:jido, "~> 2.3"},
       {:phoenix_live_view, "~> 1.0"},
       {:phoenix_live_dashboard, "~> 0.8"},
       {:telemetry_metrics, "~> 1.1"},
