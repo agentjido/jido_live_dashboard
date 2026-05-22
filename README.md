@@ -1,5 +1,13 @@
 # JidoLiveDashboard
 
+[![Hex.pm](https://img.shields.io/hexpm/v/jido_live_dashboard.svg)](https://hex.pm/packages/jido_live_dashboard)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/jido_live_dashboard/)
+[![CI](https://github.com/agentjido/jido_live_dashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/agentjido/jido_live_dashboard/actions/workflows/ci.yml)
+[![License](https://img.shields.io/hexpm/l/jido_live_dashboard.svg)](https://github.com/agentjido/jido_live_dashboard/blob/main/LICENSE)
+[![Website](https://img.shields.io/badge/website-jido.run-0f172a.svg)](https://jido.run)
+[![Ecosystem](https://img.shields.io/badge/ecosystem-jido.run-0ea5e9.svg)](https://jido.run/ecosystem)
+[![Discord](https://img.shields.io/badge/discord-join-5865F2.svg?logo=discord&logoColor=white)](https://jido.run/discord)
+
 Real-time monitoring and debugging tools for the [Jido](https://github.com/agentjido/jido) agent ecosystem, built on Phoenix LiveView and LiveDashboard.
 
 ## Features
