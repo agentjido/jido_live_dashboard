@@ -25,8 +25,6 @@ defmodule JidoLiveDashboard.TraceBuffer do
 
   use GenServer
 
-  require Logger
-
   @table_name :jido_live_dashboard_traces
   @default_buffer_size 500
 
