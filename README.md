@@ -1,5 +1,10 @@
 # JidoLiveDashboard
 
+> [!IMPORTANT]
+> **`jido_live_dashboard` is planned for deprecation.** There is no confirmed successor.
+>
+> Existing applications can continue to use their current dependency while they plan for the change.
+
 [![Hex.pm](https://img.shields.io/hexpm/v/jido_live_dashboard.svg)](https://hex.pm/packages/jido_live_dashboard)
 [![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/jido_live_dashboard/)
 [![CI](https://github.com/agentjido/jido_live_dashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/agentjido/jido_live_dashboard/actions/workflows/ci.yml)
